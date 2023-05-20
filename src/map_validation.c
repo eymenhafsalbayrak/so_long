@@ -6,13 +6,13 @@
 /*   By: ealbayra <ealbayra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:35:50 by yerkiral          #+#    #+#             */
-/*   Updated: 2023/05/10 23:18:28 by ealbayra         ###   ########.fr       */
+/*   Updated: 2023/05/20 23:53:26 by ealbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_ret(t_game *sl)
+int	is_ret(t_game *sl) //ASK HIM // map dortgen mi
 {
 	char	**map;
 	int		i;
@@ -29,7 +29,7 @@ int	is_ret(t_game *sl)
 	return (0);
 }
 
-int	is_wall(char **map, int x, int y)
+int	is_wall(char **map, int x, int y) // duvar var mi kontrolu
 {
 	int	i;
 	int	j;
@@ -54,7 +54,7 @@ int	is_wall(char **map, int x, int y)
 	return (0);
 }
 
-int	is_pec(t_game *sl)
+int	is_pec(t_game *sl) // player, exit ve coins kontrolu
 {
 	int	i;
 	int	j;
@@ -75,12 +75,12 @@ int	is_pec(t_game *sl)
 		}
 		i++;
 	}
-	if (sl->ply != 1 || sl->exit == 0 || sl->coins == 0)
+	if (sl->ply != 1 || sl->exit != 1 || sl->coins == 0)
 		return (1);
 	return (0);
 }
 
-int	is_chr(t_game *sl)
+int	is_chr(t_game *sl) // player, exit, coins disinda bir karakter var mi kontrolu
 {
 	int	i;
 	int	j;
@@ -102,7 +102,7 @@ int	is_chr(t_game *sl)
 	return (0);
 }
 
-int	map_validation(t_game *sl)
+int	map_validation(t_game *sl) // kontrol dagilimi
 {
 	if (is_ret(sl))
 		return (1);

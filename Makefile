@@ -1,4 +1,4 @@
-SRC = src/main.c src/game.c src/map_constraction.c src/map_validation.c src/draw.c src/utils.c src/input.c
+SRC = src/main.c src/game.c src/map_constraction.c src/map_validation.c src/draw.c src/utils.c src/input.c src/utils2.c
 	 
 # BSRC = src_bonus/bmain.c
 
