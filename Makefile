@@ -1,5 +1,5 @@
-SRC = src/main.c src/game.c src/map_constraction.c src/map_validation.c src/draw.c src/utils.c src/input.c src/utils2.c
-	 
+SRC = src/main.c src/game.c src/map_constraction.c src/map_validation.c src/draw.c src/utils.c src/input.c src/utils2.c src/path_finding.c
+
 # BSRC = src_bonus/bmain.c
 
 INC = inc
@@ -13,7 +13,7 @@ all: $(NAME)
 
 $(NAME): $(SRC)
 	@make -C mlx
-	@gcc -o $@ $^ $(CFLAGS) $(FRAMEWORKS) $(MLX) -I $(INC)
+	@gcc -g -o $@ $^ $(CFLAGS) $(FRAMEWORKS) $(MLX) -I $(INC)
 
 bonus: $(BNAME)
 

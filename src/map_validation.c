@@ -6,30 +6,32 @@
 /*   By: ealbayra <ealbayra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:35:50 by yerkiral          #+#    #+#             */
-/*   Updated: 2023/05/20 23:53:26 by ealbayra         ###   ########.fr       */
+/*   Updated: 2023/05/21 21:00:31 by ealbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_ret(t_game *sl) //ASK HIM // map dortgen mi
+int	is_ret(t_game *sl)
 {
 	char	**map;
 	int		i;
+	int		len;
 
 	map = sl->map;
 	i = 1;
+	len = ft_strlen(map[0]);
 	while (i < sl->map_height)
 	{
-		if (ft_strlen(map[i]) != ft_strlen(map[0]))
+		if (len != ft_strlen(map[i]))
 			return (1);
 		i++;
 	}
-	sl->map_width = ft_strlen(map[0]);
+	sl->map_width = len;
 	return (0);
 }
 
-int	is_wall(char **map, int x, int y) // duvar var mi kontrolu
+int	is_wall(char **map, int x, int y)
 {
 	int	i;
 	int	j;
@@ -45,7 +47,7 @@ int	is_wall(char **map, int x, int y) // duvar var mi kontrolu
 	}
 	i = 1;
 	len = ft_strlen(map[i]);
-	while (i < y)
+	while (i < y - 1)
 	{
 		if (map[i][0] != '1' || map[i][len - 1] != '1')
 			return (1);
@@ -54,7 +56,7 @@ int	is_wall(char **map, int x, int y) // duvar var mi kontrolu
 	return (0);
 }
 
-int	is_pec(t_game *sl) // player, exit ve coins kontrolu
+int	is_pec(t_game *sl)
 {
 	int	i;
 	int	j;
@@ -80,7 +82,7 @@ int	is_pec(t_game *sl) // player, exit ve coins kontrolu
 	return (0);
 }
 
-int	is_chr(t_game *sl) // player, exit, coins disinda bir karakter var mi kontrolu
+int	is_chr(t_game *sl)
 {
 	int	i;
 	int	j;
@@ -95,6 +97,11 @@ int	is_chr(t_game *sl) // player, exit, coins disinda bir karakter var mi kontro
 				&& sl->map[i][j] != 'C'
 				&& sl->map[i][j] != '0' && sl->map[i][j] != '1')
 				return (1);
+			if (sl->map[i][j] == 'P')
+			{
+				sl->player_y = i;
+				sl->player_x = j;
+			}
 			j++;
 		}
 		i++;
@@ -102,7 +109,7 @@ int	is_chr(t_game *sl) // player, exit, coins disinda bir karakter var mi kontro
 	return (0);
 }
 
-int	map_validation(t_game *sl) // kontrol dagilimi
+int	map_validation(t_game *sl)
 {
 	if (is_ret(sl))
 		return (1);
@@ -111,6 +118,8 @@ int	map_validation(t_game *sl) // kontrol dagilimi
 	if (is_chr(sl))
 		return (1);
 	if (is_wall(sl->map, sl->map_width, sl->map_height))
+		return (1);
+	if (flood_fill(sl))
 		return (1);
 	return (0);
 }

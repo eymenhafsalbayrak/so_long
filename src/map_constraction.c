@@ -6,13 +6,13 @@
 /*   By: ealbayra <ealbayra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:46:42 by yerkiral          #+#    #+#             */
-/*   Updated: 2023/05/20 22:58:56 by ealbayra         ###   ########.fr       */
+/*   Updated: 2023/05/21 14:26:03 by ealbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static char	*put_line(char *buffer, int *bf) // cakma get_next_line
+static char	*put_line(char *buffer, int *bf)
 {
 	char	*line;
 	int		buffer_index;
@@ -37,7 +37,7 @@ static char	*put_line(char *buffer, int *bf) // cakma get_next_line
 	return (line);
 }
 
-static int	count_nl(char *buffer, int size) // newline counter
+static int	count_nl(char *buffer, int size)
 {
 	int	enter;
 	int	i;
@@ -62,18 +62,18 @@ static char	**map_builder(char *buffer, int size, t_game *sl)
 
 	index = 0;
 	bf = 0;
-	enter = count_nl(buffer, size); // newline sayisini enter'a atama
+	enter = count_nl(buffer, size);
 	sl->map_height = enter;
-	map = (char **) malloc(sizeof(char *) * enter); // height-newline kadar map degiskenine malloc ile yer aciliyor 
+	map = (char **) malloc(sizeof(char *) * enter);
 	while (index < enter)
 	{
-		map[index] = put_line(buffer, &bf); // cakma gnl ile map'in kutucuklarina yerlestirme? ASK HIM
+		map[index] = put_line(buffer, &bf);
 		index++;
 	}
 	return (map);
 }
 
-char	**map_constractor(t_game *game, int fd) // dosyayi/ map'i okuma
+char	**map_constractor(t_game *game, int fd)
 {
 	char	buffer[10000];
 	int		i;
@@ -81,7 +81,7 @@ char	**map_constractor(t_game *game, int fd) // dosyayi/ map'i okuma
 
 	bytes = 1;
 	i = 0;
-	ft_reset(buffer); // neden resetliyoruz? ASK HIM
+	ft_reset(buffer);
 	while (bytes)
 	{
 		bytes = read(fd, &buffer[i], 1);
